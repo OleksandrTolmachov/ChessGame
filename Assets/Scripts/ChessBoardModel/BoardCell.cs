@@ -2,11 +2,11 @@
 {
     public int Xpos { get; }
     public int Ypos { get; }
-    public Cell _cell { get; }
+    public Cell Cell { get; }
 
     public BoardCell(Cell cell, int x, int y)
     {
-        _cell = cell;
+        Cell = cell;
         Xpos = x;
         Ypos = y;
         if (cell.IsOccupied)

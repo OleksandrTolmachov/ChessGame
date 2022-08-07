@@ -6,11 +6,13 @@ using UnityEngine;
 public class ChessBoard
 {
     [SerializeField]
-    private static ChessBoard _board; 
-    public static void InitBoard(int lengthY, int lengthX, ICollection<Cell> cells)
+    private static ChessBoard _board;
+    [SerializeField]
+    private UnitMovement _movement;
+    public static void InitBoard(int lengthY, int lengthX, UnitMovement movement, ICollection<Cell> cells)
     {
         if (_board == null)
-            _board = new(lengthY, lengthX, cells);
+            _board = new(lengthY, lengthX, movement, cells);
     }
     public static ChessBoard Instance { get { return _board; } }
 
@@ -19,8 +21,9 @@ public class ChessBoard
 
     private BoardCell[,] _grid;
 
-    private ChessBoard(int lengthY, int lengthX, ICollection<Cell> cells)
+    private ChessBoard(int lengthY, int lengthX, UnitMovement movement, ICollection<Cell> cells)
     {
+        _movement = movement;
         _grid = new BoardCell[lengthY, lengthX];
         var cellsQueue = cells.GetEnumerator();
         for (int i = 0; i < lengthY; i++)
@@ -55,11 +58,18 @@ public class ChessBoard
     {
         foreach (var item in _grid)
         {
-            if(ReferenceEquals(item._cell, cell))
+            if(ReferenceEquals(item.Cell, cell))
             {
                 return item;
             }
         }
         return null;
+    }
+
+    public void MoveUnit(BoardCell unitBoard, BoardCell cell)
+    {
+        _movement.AddTask(unitBoard.Cell.OccupiedUnit, new Vector3(cell.Xpos,cell.Ypos), 0.05f);
+        cell.Cell.Occupy(unitBoard.Cell.OccupiedUnit);
+        unitBoard.Cell.Deoccupy();
     }
 }

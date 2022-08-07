@@ -3,20 +3,20 @@ using UnityEngine;
 
 public class MoveToCommand : ICommand
 {
-    Transform _transform;
-    private Vector3 _position;
+    private BoardCell _unitBoardCell;
+    private BoardCell _emptyBoardCell;
 
-    public MoveToCommand(Transform fromTransform, Vector3 toPos)
+    public MoveToCommand(BoardCell unitBoardCell, BoardCell emptyBoardCell)
     {
-        _transform = fromTransform;
-        _position = toPos;
+        _unitBoardCell = unitBoardCell;
+        _emptyBoardCell = emptyBoardCell;
     }
 
     public void Execute()
     {
-        while (_transform.position != _position)
+        if (_unitBoardCell.Cell.OccupiedUnit != null)
         {
-            _transform.position = _position;
+            ChessBoard.Instance.MoveUnit(_unitBoardCell, _emptyBoardCell);
         }
     }
 }

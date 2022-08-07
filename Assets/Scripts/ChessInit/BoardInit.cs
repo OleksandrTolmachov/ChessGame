@@ -11,7 +11,19 @@ public class BoardInit : MonoBehaviour
     private Cell _prefabCell2;
     [SerializeField]
     private Unit _unit;
+    [SerializeField]
+    private UnitMovement _movement;
+    [SerializeField]
+    private int _xb;
+    [SerializeField]
+    private int _yb;
+
     #endregion
+
+    private void Start()
+    {
+        InitBoard(_xb, _yb);
+    }
 
     public void InitBoard(int y, int x)
     {
@@ -36,6 +48,6 @@ public class BoardInit : MonoBehaviour
         }
         var unit = Instantiate(_unit, new Vector2(0, 0), Quaternion.identity);
         cells[0].Occupy(unit);
-        ChessBoard.InitBoard(y, x, cells);
+        ChessBoard.InitBoard(_yb, _xb, _movement, cells);
     }
 }
