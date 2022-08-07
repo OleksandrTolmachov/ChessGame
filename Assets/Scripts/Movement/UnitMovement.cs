@@ -5,6 +5,18 @@ using UnityEngine;
 
 public class UnitMovement : MonoBehaviour
 {
+    private static UnitMovement _unitMovement;
+    public static UnitMovement Instance
+    {
+        get
+        {
+            if (_unitMovement == null)
+            {
+                _unitMovement = new GameObject().AddComponent<UnitMovement>();
+            }
+            return _unitMovement;
+        }
+    }
     public class MoveTask
     {
         public Unit Target;
@@ -21,7 +33,7 @@ public class UnitMovement : MonoBehaviour
 
     private List<MoveTask> _tasks = new List<MoveTask>(); 
 
-    public void AddTask(Unit target, Vector3 position, float speed)
+    public void AddTask(Unit target, Vector3 position, float speed = 0.1f)
     {
         if (target == null)
             return;
@@ -37,7 +49,7 @@ public class UnitMovement : MonoBehaviour
         _tasks.Add(new MoveTask(target, position, speed));
     }
 
-    void Update()
+    void FixedUpdate()
     {
         for (int i = 0; i < _tasks.Count; i++)
         {

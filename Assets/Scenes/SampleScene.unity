@@ -152,9 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbdc0351f0ca30c4d9b483ef7659549b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _x: 6
-  _y: 6
-  _chessInit: {fileID: 1283618519}
 --- !u!4 &18820186
 Transform:
   m_ObjectHideFlags: 0
@@ -246,14 +243,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_LocalRotation: {x: 0.13611248, y: -0, z: -0, w: 0.99069345}
+  m_LocalRotation: {x: -0.13059743, y: -0, z: -0, w: 0.99143547}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 15.646, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -15.008, y: 0, z: 0}
 --- !u!1 &1283618516
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,6 +261,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1283618518}
   - component: {fileID: 1283618519}
+  - component: {fileID: 1283618520}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -300,4 +298,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefabCell1: {fileID: 4537092586303960095, guid: 5367415134da9444c8deb4409fbfa775, type: 3}
   _prefabCell2: {fileID: 0}
-  _unit: {fileID: 5940153647758311602, guid: 39385abaa1419dd49a82630f158c9b93, type: 3}
+  _unit1: {fileID: 6095933547065803922, guid: 108430a325e08c14a980d8c5955d7732, type: 3}
+  _unit2: {fileID: 5940153647758311602, guid: 39385abaa1419dd49a82630f158c9b93, type: 3}
+  _movement: {fileID: 1283618520}
+  _xb: 5
+  _yb: 5
+--- !u!114 &1283618520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283618516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48d6b2ea3f59e504b8bb705c13b418b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

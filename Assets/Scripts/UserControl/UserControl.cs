@@ -10,7 +10,7 @@ public class UserControl : MonoBehaviour
         IsMoving
     }
 
-    private BoardCell _choosenCell;
+    private Cell _choosenCell;
     private PlayerState _state;
     private Vector3 camPosition;
 
@@ -39,17 +39,18 @@ public class UserControl : MonoBehaviour
     private void tryToChoose()
     {
         if (ChessBoard.Instance.TryToGetCell(Camera.main.ScreenPointToRay(Input.mousePosition),
-            out BoardCell boardCell))
+            out Cell cell))
         {
-            if(_choosenCell != null && !ReferenceEquals(_choosenCell, boardCell.Cell))
+            if(_choosenCell != null && !ReferenceEquals(_choosenCell, cell))
             {
-                _choosenCell.Cell.Deselect();
+                _choosenCell.Deselect();
             }
-            boardCell.Cell.Select();
-            _choosenCell = boardCell;
-            if (Input.GetMouseButtonDown(0) && boardCell.Cell.IsOccupied)
+            cell.Select();
+            _choosenCell = cell;
+            if (Input.GetMouseButtonDown(0) && _choosenCell.IsOccupied)
             {
-                camPosition = new Vector3(boardCell.Xpos, boardCell.Ypos, Camera.main.transform.position.z);
+                camPosition = new Vector3
+                    (cell.transform.position.x, cell.transform.position.y, Camera.main.transform.position.z);
                 _state = PlayerState.IsMoving;
             }
         }
@@ -58,13 +59,17 @@ public class UserControl : MonoBehaviour
     private void tryToMove()
     {
         if (ChessBoard.Instance.TryToGetCell(Camera.main.ScreenPointToRay(Input.mousePosition),
-            out BoardCell boardCell))
+            out Cell cell))
         {
-            if(boardCell.Cell != null && !boardCell.Cell.IsOccupied)
+            if(cell != null && !cell.IsOccupied)
             {
-                var command = new MoveToCommand(_choosenCell, boardCell);
+                var command = new MoveToCommand(_choosenCell, cell);
 
                 CommandManager.Instance.Execute(command);
+                _state = PlayerState.IsChoosing;
+            }
+            else if (cell != null && cell.IsOccupied)
+            {
                 _state = PlayerState.IsChoosing;
             }
         }

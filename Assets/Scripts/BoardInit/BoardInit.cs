@@ -10,7 +10,7 @@ public class BoardInit : MonoBehaviour
     [SerializeField]
     private Cell _prefabCell2;
     [SerializeField]
-    private Unit _unit;
+    private Unit _unit1, _unit2;
     [SerializeField]
     private UnitMovement _movement;
     [SerializeField]
@@ -46,8 +46,10 @@ public class BoardInit : MonoBehaviour
                 }
             }
         }
-        var unit = Instantiate(_unit, new Vector2(0, 0), Quaternion.identity);
+        var unit = Instantiate(_unit1, new Vector2(0, 0), Quaternion.identity);
         cells[0].Occupy(unit);
+        var unit2 = Instantiate(_unit2, new Vector2(0, 0), Quaternion.identity);
+        cells[3].Occupy(unit2);
         ChessBoard.InitBoard(_yb, _xb, _movement, cells);
     }
 }

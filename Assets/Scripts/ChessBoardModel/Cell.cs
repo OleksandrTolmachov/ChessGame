@@ -16,6 +16,7 @@ public class Cell : MonoBehaviour
         if (unit != null)
         {
             OccupiedUnit = unit;
+            UnitMovement.Instance.AddTask(unit, transform.position);
         }
     }
 
