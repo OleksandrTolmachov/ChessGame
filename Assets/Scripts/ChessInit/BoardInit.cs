@@ -10,11 +10,7 @@ public class BoardInit : MonoBehaviour
     [SerializeField]
     private Cell _prefabCell2;
     [SerializeField]
-    private int _x;
-    [SerializeField]
-    private int _y;
-    [SerializeField]
-    private Unit unit;
+    private Unit _unit;
     #endregion
 
     public void InitBoard(int y, int x)
@@ -23,12 +19,10 @@ public class BoardInit : MonoBehaviour
         {
             return;
         }
-        _x = x;
-        _y = y;
         List<Cell> cells = new();
-        for (int i = 0; i < _y; i++)
+        for (int i = 0; i < y; i++)
         {
-            for (int j = 0; j < _x; j++)
+            for (int j = 0; j < x; j++)
             {
                 var cell = Instantiate(_prefabCell1, new Vector2(i, j), Quaternion.identity);
                 cell.transform.parent = this.transform;
@@ -40,6 +34,8 @@ public class BoardInit : MonoBehaviour
                 }
             }
         }
-        ChessBoard.InitBoard(_y, _x, cells);
+        var unit = Instantiate(_unit, new Vector2(0, 0), Quaternion.identity);
+        cells[0].Occupy(unit);
+        ChessBoard.InitBoard(y, x, cells);
     }
 }

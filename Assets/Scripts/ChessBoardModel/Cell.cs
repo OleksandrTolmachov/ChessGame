@@ -9,12 +9,11 @@ public class Cell : MonoBehaviour
     public UnityEvent OnDeselected;
 
     public bool IsOccupied { get => OccupiedUnit != null; }
-
-    public Unit OccupiedUnit;
+    public Unit OccupiedUnit { get; private set; }
 
     public void Occupy(Unit unit)
     {
-        if (OccupiedUnit != null)
+        if (unit != null)
         {
             OccupiedUnit = unit;
         }

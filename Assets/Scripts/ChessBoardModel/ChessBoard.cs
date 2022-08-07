@@ -41,7 +41,7 @@ public class ChessBoard
         RaycastHit hit;
         if(Physics.Raycast(ray, out hit))
         {
-            if (hit.collider.TryGetComponent<Cell>(out Cell cell))
+            if (hit.collider.TryGetComponent(out Cell cell))
             {
                 bcell = findMatchCell(cell);
                 return true;
