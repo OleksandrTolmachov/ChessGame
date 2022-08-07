@@ -7,15 +7,22 @@ public class Cell : MonoBehaviour
 {
     public UnityEvent OnSelected;
     public UnityEvent OnDeselected;
-    public bool IsOccupied { get => _occupiedUnit != null; }
-    private Unit _occupiedUnit;
+
+    public bool IsOccupied { get => OccupiedUnit != null; }
+
+    public Unit OccupiedUnit;
 
     public void Occupy(Unit unit)
     {
-        if (_occupiedUnit != null)
+        if (OccupiedUnit != null)
         {
-            _occupiedUnit = unit;
+            OccupiedUnit = unit;
         }
+    }
+
+    public void Deoccupy()
+    {
+        OccupiedUnit = null;
     }
 
     public void Deselect()

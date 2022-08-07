@@ -13,7 +13,7 @@ public class UserControl : MonoBehaviour
     public int _y;
 
     [SerializeField]
-    private ChessDrawer _chessDrawer;
+    private BoardInit _chessDrawer;
     private Cell _choosenCell;
     private PlayerState _state;
 
@@ -39,15 +39,18 @@ public class UserControl : MonoBehaviour
 
     private void tryToChoose()
     {
-        if (ChessBoard.Instance.TryToGetCell(Camera.main.ScreenPointToRay(Input.mousePosition), out Cell cell))
+        if (ChessBoard.Instance.TryToGetCell(Camera.main.ScreenPointToRay(Input.mousePosition), out BoardCell boardCell))
         {
-            if(_choosenCell != null && _choosenCell != cell)
+            if(_choosenCell != null && !ReferenceEquals(_choosenCell, boardCell._cell))
             {
                 _choosenCell.Deselect();
             }
-            cell.Select();
-            _choosenCell = cell;
-            if (Input.GetMouseButtonDown(0))
+            boardCell._cell.Select();
+            _choosenCell = boardCell._cell;
+
+            CommandManager.Instance.Execute(new CameraMoveToCommand(
+               new Vector3(boardCell.Xpos, boardCell.Ypos, Camera.main.transform.position.z)));
+            if (Input.GetMouseButtonDown(0) && boardCell._cell.IsOccupied)
             {
                 _state = PlayerState.IsMoving;
             }

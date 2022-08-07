@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChessDrawer : MonoBehaviour
+public class BoardInit : MonoBehaviour
 {
     #region fields
     [SerializeField]
@@ -13,6 +13,8 @@ public class ChessDrawer : MonoBehaviour
     private int _x;
     [SerializeField]
     private int _y;
+    [SerializeField]
+    private Unit unit;
     #endregion
 
     public void InitBoard(int y, int x)

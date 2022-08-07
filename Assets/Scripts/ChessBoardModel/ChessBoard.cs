@@ -17,11 +17,11 @@ public class ChessBoard
     public int LengthY { get => _grid.GetLength(0); }
     public int LengthX { get => _grid.GetLength(1); }
 
-    private Cell[,] _grid;
+    private BoardCell[,] _grid;
 
     private ChessBoard(int lengthY, int lengthX, ICollection<Cell> cells)
     {
-        _grid = new Cell[lengthY, lengthX];
+        _grid = new BoardCell[lengthY, lengthX];
         var cellsQueue = cells.GetEnumerator();
         for (int i = 0; i < lengthY; i++)
         {
@@ -31,22 +31,35 @@ public class ChessBoard
                 {
                     throw new Exception();
                 }
-                _grid[i, j] = cellsQueue.Current;
+                _grid[i, j] = new BoardCell(cellsQueue.Current, i, j);
             }
         }
     }
 
-    public bool TryToGetCell(Ray ray, out Cell cell)
+    public bool TryToGetCell(Ray ray, out BoardCell bcell)
     {
         RaycastHit hit;
         if(Physics.Raycast(ray, out hit))
         {
-            if (hit.collider.TryGetComponent<Cell>(out cell))
+            if (hit.collider.TryGetComponent<Cell>(out Cell cell))
             {
+                bcell = findMatchCell(cell);
                 return true;
             }
         }
-        cell = null;
+        bcell = null;
         return false;
+    }
+
+    private BoardCell findMatchCell(Cell cell)
+    {
+        foreach (var item in _grid)
+        {
+            if(ReferenceEquals(item._cell, cell))
+            {
+                return item;
+            }
+        }
+        return null;
     }
 }
