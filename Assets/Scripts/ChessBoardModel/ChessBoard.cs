@@ -36,4 +36,17 @@ public class ChessBoard
         }
     }
 
+    public bool TryToGetCell(Ray ray, out Cell cell)
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(ray, out hit))
+        {
+            if (hit.collider.TryGetComponent<Cell>(out cell))
+            {
+                return true;
+            }
+        }
+        cell = null;
+        return false;
+    }
 }
