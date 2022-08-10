@@ -36,14 +36,17 @@ public class BoardInit : MonoBehaviour
         {
             for (int j = 0; j < x; j++)
             {
-                var cell = Instantiate(_prefabCell1, new Vector2(i, j), Quaternion.identity);
+                Cell cell;
+                if ((i % 2 == 0 && j % 2 != 0) || (i % 2 != 0 && j % 2 == 0))
+                {
+                    cell = Instantiate(_prefabCell1, new Vector2(i, j), Quaternion.identity);
+                }
+                else
+                {
+                    cell = Instantiate(_prefabCell2, new Vector2(i, j), Quaternion.identity);
+                }
                 cell.transform.parent = this.transform;
                 cells.Add(cell);
-
-                if((i % 2 == 0 && j % 2 != 0) || (i % 2 != 0 && j % 2 == 0))
-                {
-                    cell.GetComponent<SpriteRenderer>().color = Color.green; 
-                }
             }
         }
         var unit = Instantiate(_unit1, new Vector2(0, 0), Quaternion.identity);

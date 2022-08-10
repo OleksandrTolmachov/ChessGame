@@ -296,8 +296,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edba794ab9f2afc4d8540a0ac5bedf54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefabCell1: {fileID: 4537092586303960095, guid: 5367415134da9444c8deb4409fbfa775, type: 3}
-  _prefabCell2: {fileID: 0}
+  _prefabCell1: {fileID: 4537092586303960095, guid: a8b94b72d51093f4eaa2c1fa1a096463, type: 3}
+  _prefabCell2: {fileID: 4537092586303960095, guid: 1168eb6210259b24e85991a7dc6f53df, type: 3}
   _unit1: {fileID: 6095933547065803922, guid: 108430a325e08c14a980d8c5955d7732, type: 3}
   _unit2: {fileID: 5940153647758311602, guid: 39385abaa1419dd49a82630f158c9b93, type: 3}
   _movement: {fileID: 1283618520}
