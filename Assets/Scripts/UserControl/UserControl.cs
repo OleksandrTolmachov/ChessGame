@@ -13,6 +13,8 @@ public class UserControl : MonoBehaviour
     private Cell _choosenCell;
     private PlayerState _state;
     private Vector3 camPosition;
+    [SerializeField]
+    private float shiftSpeed;
 
     private void Start()
     {
@@ -22,8 +24,8 @@ public class UserControl : MonoBehaviour
 
     private void Update()
     {
-        Camera.main.transform.position = Vector3.MoveTowards
-            (Camera.main.transform.position, camPosition, 2.2f * Time.deltaTime);
+        Camera.main.transform.position = Vector3.Lerp
+            (Camera.main.transform.position, camPosition, shiftSpeed * Time.deltaTime);
         switch (_state)
         {
             case PlayerState.IsChoosing:

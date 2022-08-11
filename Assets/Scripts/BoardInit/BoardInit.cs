@@ -5,6 +5,7 @@ using UnityEngine;
 public class BoardInit : MonoBehaviour
 {
     #region fields
+    //for testing
     [SerializeField]
     private Cell _prefabCell1;
     [SerializeField]
